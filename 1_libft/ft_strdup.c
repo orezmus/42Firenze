@@ -29,15 +29,16 @@ char	*ft_strdup(const char *src)
 	dest[i] = '\0';
 	return (dest);
 }
-/*int		main(void)
+
+int		main(void)
 {
 	char	*str;
 	char	*allocated;
 
 	str = "Hello World with malloc()";
-	printf("x  : base  : $%s$ \n", str, );
+	printf("x  : base  : $%s$ \n", str );
 	allocated = strdup(str);
-	printf("c  : alloc : $%s$ \n", allocated, );
+	printf("c  : alloc : $%s$ \n", allocated );
 	allocated = ft_strdup(str);
-	printf("ft : alloc : $%s$ \n", allocated, );
-}	*/
+	printf("ft : alloc : $%s$ \n", allocated );
+}	
