@@ -12,20 +12,41 @@
 
 #include "../includes/cud3d.h"
 
+static int	map_check_blank(t_game *game)
+{
+	int	i;
+	int	j;
+	
+	i = -1;
+	while (++i < game->y)
+	{
+		j = 0;
+		while (game->map[i][j] == ' ')
+				j++;
+		while (j < ft_strlen(game->map[i])
+		{
+			if (!ft_isalnum(game->map[i][j])
+				return (FALSE);
+			j++;
+		}
+	return (TRUE);
+}
+
+
 static int	map_check_wall(t_game *game)
 {
 	int	i;
 	int	j;
 	
-	i = 0;
-	while (i < game->y)
+	i = -1;
+	while (++i < game->y)
 	{
 		if (i == 0 || i == game->y - 1)
 		{
 			j = 0;
 			while (j < ft_strlen(game->map[i] && game->map[i][j] == ' ')
 				j++;
-			while (j < game->x)
+			while (j < ft_strlen(game->map[i])
 			{
 				if (game->map[i][j] != WALL)
 					return (FALSE);
@@ -45,5 +66,7 @@ static int	map_check_wall(t_game *game)
 void	map_check(t_game *game)
 {
 	if (map_check_wall(game) == FALSE)
-		exit_error(1, "The map must be surrounded by walls.", game)
-	if (map_check_blank(game) == FA
+		exit_error(1, "The map must be surrounded by walls.", game);
+	if (map_check_blank(game) == FALSE)
+		exit_error(1, "The map has black.", game);
+}
