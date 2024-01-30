@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 19:38:12 by sum               #+#    #+#             */
-/*   Updated: 2022/05/21 19:38:14 by sum              ###   ########.fr       */
+/*   Updated: 2024/01/28 19:23:44 by sum              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strdup(const char *src)
 	char	*dest;
 	int		i;
 
+	if (src == NULL)
+		return (NULL);
 	dest = (char *)malloc(sizeof(char) * (ft_strlen(src) + 1));
 	if (dest == 0)
 		return (0);

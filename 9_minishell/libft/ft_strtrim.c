@@ -33,11 +33,11 @@ char	*ft_strtrim(const char *s1, const char *set)
 	}
 	return (array);
 }
-
+/*
 int	main()
 {
 	char array[] = "111222114242411";
 	char set[] = "111";
 	
 	printf("%s", ft_strtrim(array, set));
-}
+}*/

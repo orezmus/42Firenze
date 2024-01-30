@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 14:30:59 by sum               #+#    #+#             */
-/*   Updated: 2024/01/28 19:21:56 by sum              ###   ########.fr       */
+/*   Created: 2024/01/25 23:16:02 by sum               #+#    #+#             */
+/*   Updated: 2024/01/29 15:13:48 by sum              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-int	ft_strlen(const char *str)
+void	ft_pwd(void)
 {
-	int	count;
+	char	*pwd;
 
-	count = 0;
-	while (str[count])
-		count++;
-	return (count);
+	pwd = getcwd(0, 1024);
+	ft_putendl_fd(pwd, 1);
+	free(pwd);
+	exit_status(NULL, 0);
 }
-
-/*int	main(void)
-{
-	char *str, *str2;
-
-	str = "Hello ";
-	str2 = "Pineapple";
-	printf("expected: %lu\n", strlen(str));
-	printf("yours: %d\n\n", ft_strlen(str));
-        printf("expected: %lu\n", strlen(str2));
-        printf("yours: %d\n", ft_strlen(str2));
-}*/
