@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:23:54 by sum               #+#    #+#             */
-/*   Updated: 2024/01/30 11:37:35 by femorell         ###   ########.fr       */
+/*   Updated: 2024/02/03 09:45:57 by sum              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	exec_list(t_data *data, t_list *command)
-{
-	if (((t_cmd *)command->content)->type == CMD)
-		exec_cmd(data, command);
-	close_fd();
-	exec_fork_builtin(data, command);
-	exit(0);
-}
 
 void	exec_dup(t_data *data)
 {
@@ -47,6 +38,29 @@ void	exec_dup(t_data *data)
 	}
 }
 
+void	exec_list(t_data *data, t_list *command)
+{
+	t_list	*current;
+	t_cmd	*cmd;
+
+	current = command;
+	cmd = (t_cmd *)current->content;
+	while (current->next && cmd->type != CMD && cmd->type != BUILTIN)
+	{
+		if (((t_cmd *)current->next->content)->type == PIPE)
+			exit(0);
+		current = current->next;
+		cmd = (t_cmd *)current->content;
+	}
+	exec_dup(data);
+	if (cmd->type == CMD)
+		exec_cmd(data, current);
+	exec_fork_builtin(data, current);
+	close_fd();
+	free_shell(data);
+	exit(0);
+}
+
 void	exec_fork(t_data *data, t_list *command)
 {
 	pid_t	pid;
@@ -59,9 +73,9 @@ void	exec_fork(t_data *data, t_list *command)
 		if (data->fd[2][0] == -1 && data->arg == 1)
 		{
 			close_fd();
+			free_shell(data);
 			exit(1);
 		}
-		exec_dup(data);
 		exec_list(data, command);
 	}
 	else

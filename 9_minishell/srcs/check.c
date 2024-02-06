@@ -6,11 +6,33 @@
 /*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:20:52 by sum               #+#    #+#             */
-/*   Updated: 2024/01/29 21:42:01 by femorell         ###   ########.fr       */
+/*   Updated: 2024/02/03 11:25:45 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static int	check_redir2(t_list *command)
+{
+	t_cmd	*cmd;
+	t_cmd	*cmd_next;
+
+	cmd = (t_cmd *)command->content;
+	cmd_next = (t_cmd *)command->next->content;
+	if ((cmd->type < PIPE && cmd_next->type < PIPE))
+	{
+		print_msg(1, cmd_next->line);
+		exit_status(NULL, 2);
+		return (2);
+	}
+	if (cmd->type != REDIRIN && opendir(cmd_next->line))
+	{
+		print_msg(2, cmd_next->line);
+		exit_status(NULL, 1);
+		return (1);
+	}
+	return (0);
+}
 
 int	check_redir(t_list *command)
 {
@@ -21,23 +43,17 @@ int	check_redir(t_list *command)
 	if (!command->next)
 	{
 		print_msg(1, " `newline'\n");
-		exit_status(NULL, 258);
-		return (258);
+		exit_status(NULL, 2);
+		return (2);
 	}
 	cmd_next = (t_cmd *)command->next->content;
-	if ((cmd->type <= PIPE && cmd_next->type <= PIPE))
+	if ((cmd->type <= PIPE && cmd_next->type == PIPE))
 	{
 		print_msg(1, cmd_next->line);
-		exit_status(NULL, 258);
-		return (258);
+		exit_status(NULL, 2);
+		return (2);
 	}
-	else if (cmd->type != REDIRIN && opendir(cmd_next->line))
-	{
-		print_msg(2, cmd_next->line);
-		exit_status(NULL, 1);
-		return (1);
-	}
-	return (0);
+	return (check_redir2(command));
 }
 
 int	check_syntax(t_data **data)

@@ -3,16 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:30:15 by sum               #+#    #+#             */
-/*   Updated: 2024/01/30 17:49:09 by sum              ###   ########.fr       */
+/*   Updated: 2024/02/03 13:42:56 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int	g_exit = 0;
+
+static void	exit_heredoc(char *line, char *eof, t_data *data)
+{
+	if (!line)
+	{
+		printf("warning: here-document delimited \
+			by end-of-file (wanted `%s')\n",
+			eof);
+		close(data->fd[2][0]);
+		free(line);
+		free_shell(data);
+		close_fd();
+		exit(0);
+	}
+	if (!ft_strcmp(line, eof))
+	{
+		close(data->fd[2][0]);
+		free(line);
+		free_shell(data);
+		close_fd();
+		exit(0);
+	}
+}
 
 void	child_heredoc(t_data *data, t_list *command)
 {
@@ -29,12 +52,7 @@ void	child_heredoc(t_data *data, t_list *command)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || !ft_strcmp(line, ((t_cmd *)command->content)->line))
-		{
-			close(data->fd[2][0]);
-			free(line);
-			exit(0);
-		}
+		exit_heredoc(line, ((t_cmd *)command->content)->line, data);
 		heredoc_nl(&line);
 		expansion_heredoc(&data, &line);
 		ft_putendl_fd(line, data->fd[2][0]);

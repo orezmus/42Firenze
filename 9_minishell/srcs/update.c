@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 13:52:35 by femorell          #+#    #+#             */
-/*   Updated: 2024/01/29 23:08:36 by femorell         ###   ########.fr       */
+/*   Updated: 2024/02/03 09:28:15 by sum              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,7 @@ int	check_builtin(char *str)
 		return (0);
 }
 
-static void	update_redir(t_cmd *cmd, t_cmd *cmd_next)
-{
-	if (cmd->type >= REDIROUT && cmd->type <= APPEND)
-	{
-		if (cmd->type == REDIRIN && opendir(cmd_next->line))
-			cmd_next->type = DIR;
-		else
-			cmd_next->type = FILE;
-	}
-	if (cmd->type == HEREDOC)
-		cmd_next->type = FILE;
-}
-
-static void	update_meta(t_data **data)
+static void	update_redir(t_data **data)
 {
 	t_cmd	*cmd;
 	t_cmd	*cmd_next;
@@ -49,8 +36,34 @@ static void	update_meta(t_data **data)
 		{
 			cmd = (t_cmd *)current->content;
 			cmd_next = (t_cmd *)current->next->content;
-			update_redir(cmd, cmd_next);
-			if (cmd->type == PIPE && cmd_next->type == ARG)
+			if (cmd->type >= REDIROUT && cmd->type <= APPEND)
+			{
+				if (cmd->type == REDIRIN && opendir(cmd_next->line))
+					cmd_next->type = DIR;
+				else
+					cmd_next->type = FILE;
+			}
+			if (cmd->type == HEREDOC)
+				cmd_next->type = FILE;
+		}
+		current = current->next;
+	}
+}
+
+void	update_command(t_data **data)
+{
+	t_cmd	*cmd;
+	t_cmd	*cmd_next;
+	t_list	*current;
+
+	current = (*data)->command;
+	while (current)
+	{
+		if (current->next)
+		{
+			cmd = (t_cmd *)current->content;
+			cmd_next = (t_cmd *)current->next->content;
+			if ((cmd->type <= PIPE || cmd->type > ARG) && cmd_next->type == ARG)
 			{
 				if (check_builtin(cmd_next->line))
 					cmd_next->type = BUILTIN;
@@ -80,6 +93,7 @@ int	update_arg(t_data **data)
 		else
 			cmd->type = CMD;
 	}
-	update_meta(data);
+	update_redir(data);
+	update_command(data);
 	return (0);
 }

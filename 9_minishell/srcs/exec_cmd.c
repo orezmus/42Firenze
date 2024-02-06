@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:15:41 by femorell          #+#    #+#             */
-/*   Updated: 2024/01/30 19:00:22 by sum              ###   ########.fr       */
+/*   Updated: 2024/02/03 14:19:20 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@ char	**get_cmd(t_list *command)
 
 	cmdline = (char **)malloc(sizeof(char *) * 256);
 	i = 0;
-	cmdline[i++] = ((t_cmd *)command->content)->line;
-	while (command->next && ((t_cmd *)command->next->content)->type > PIPE)
+	while (command && ((t_cmd *)command->content)->type != PIPE)
 	{
-		command = command->next;
-		cmdline[i++] = ((t_cmd *)command->content)->line;
+		if (command && ((t_cmd *)command->content)->type < PIPE)
+			command = command->next->next;
+		if (command && ((t_cmd *)command->content)->type > PIPE)
+		{
+			cmdline[i++] = ((t_cmd *)command->content)->line;
+			command = command->next;
+		}
 	}
 	cmdline[i] = '\0';
 	return (cmdline);
@@ -53,55 +57,28 @@ char	*path_info(char **temp, char *cmd)
 	return (NULL);
 }
 
-char	*get_path(t_data *data, char *cmdline)
+char	*get_path(t_data *data, char **cmdline)
 {
 	char	*temp;
 	char	**temp_path;
 	char	*path;
 
+	if (ft_strchr(cmdline[0], '/'))
+		return (ft_strdup(cmdline[0]));
 	temp = extract_envp(&data, "PATH");
 	temp_path = ft_split(temp, ':');
 	free(temp);
 	if (temp_path == NULL)
 	{
 		close_fd();
-		print_error(cmdline, NULL, "No such file or directory");
+		print_error(cmdline[0], NULL, "No such file or directory");
+		free_shell(data);
+		free(cmdline);
 		exit(127);
 	}
-	if (ft_strchr(cmdline, '/'))
-		return (ft_strdup(cmdline));
-	temp = ft_strjoin("/", cmdline);
+	temp = ft_strjoin("/", cmdline[0]);
 	path = path_info(temp_path, temp);
 	return (path);
-}
-
-static void	exec_file(t_data *data, t_list *command)
-{
-	char			*cmdline[2];
-	struct stat		st;
-
-	cmdline[0] = ((t_cmd *)command->content)->line;
-	cmdline[1] = NULL;
-	if (!stat(cmdline[0], &st) && S_ISREG(st.st_mode))
-	{
-		if (!(st.st_mode & S_IXUSR))
-		{
-			print_error(cmdline[0], NULL, "Permission denied.");
-			exit(126);
-		}
-		if (execve(cmdline[0], cmdline, data->envp) == -1)
-			exit(127);
-	}
-	else if (!stat(cmdline[0], &st) && S_ISDIR(st.st_mode))
-	{
-		print_msg(2, cmdline[0]);
-		exit(126);
-	}
-	else
-	{
-		print_error(cmdline[0], NULL, "No such file or directory.");
-		exit(127);
-	}
 }
 
 void	exec_cmd(t_data *data, t_list *command)
@@ -111,9 +88,11 @@ void	exec_cmd(t_data *data, t_list *command)
 	char	**cmdline;
 
 	cmdline = get_cmd(command);
-	path = get_path(data, cmdline[0]);
+	path = get_path(data, cmdline);
 	if (path)
+	{
 		exec = execve(path, cmdline, data->envp);
+	}
 	else
 		exec = -1;
 	free(path);
@@ -124,6 +103,7 @@ void	exec_cmd(t_data *data, t_list *command)
 	{
 		print_error(((t_cmd *)command->content)->line, \
 			NULL, "command not found");
+		free_shell(data);
 		close_fd();
 		exit(127);
 	}

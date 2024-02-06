@@ -6,7 +6,7 @@
 /*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:43:54 by femorell          #+#    #+#             */
-/*   Updated: 2024/01/30 15:33:05 by femorell         ###   ########.fr       */
+/*   Updated: 2024/02/03 11:58:55 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,26 +81,10 @@ void	error_escape(char *escape_type)
 	exit_status(NULL, 2);
 }
 
-void	check_escape(char *next_line, char **input, char escape_type)
-{
-	escape_quote(next_line, input, escape_type);
-	escape_backslash(next_line, input, escape_type);
-	escape_pipe(next_line, input, escape_type);
-}
-
-void	print_prompt(char **input)
+void	check_escape(char **input, char escape_type)
 {
 	char	*next_line;
-	char	escape_type;
 
-	escape_type = 0;
-	*input = readline("\033[34;1mbunnyfox$\033[0m ");
-	if (!*input)
-	{
-		printf("exit\n");
-		exit(0);
-	}
-	find_escape(*input, &escape_type);
 	while (escape_type)
 	{
 		next_line = readline("> ");
@@ -109,10 +93,28 @@ void	print_prompt(char **input)
 			error_escape(&escape_type);
 			break ;
 		}
-		check_escape(next_line, input, escape_type);
+		escape_quote(next_line, input, escape_type);
+		escape_backslash(next_line, input, escape_type);
+		escape_pipe(next_line, input, escape_type);
 		find_escape(next_line, &escape_type);
 		free(next_line);
 	}
+}
+
+void	print_prompt(char **input, t_data *data)
+{
+	char	escape_type;
+
+	escape_type = 0;
+	*input = readline("\001\033[34;1m\002bunnyfox$\001\033[0m\002 ");
+	if (!*input)
+	{
+		free_shell(data);
+		printf("exit\n");
+		exit(0);
+	}
+	find_escape(*input, &escape_type);
+	check_escape(input, escape_type);
 	if (**input)
 		add_history(*input);
 }

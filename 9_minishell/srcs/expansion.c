@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:28:00 by femorell          #+#    #+#             */
-/*   Updated: 2024/01/30 18:12:35 by sum              ###   ########.fr       */
+/*   Updated: 2024/02/03 11:20:32 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	expansion( t_data **data, char **line)
 	i = 0;
 	while ((*line)[i])
 	{
-		if ((*line)[i] == '$')
+		if ((*line)[i] == '$' && (*line)[i + 1]
+			&& !ft_isspace((*line)[i + 1]))
 		{
 			temp = ft_substr(*line, 0, i);
 			i++;

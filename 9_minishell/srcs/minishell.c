@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:24:27 by sum               #+#    #+#             */
-/*   Updated: 2024/01/30 18:28:39 by sum              ###   ########.fr       */
+/*   Updated: 2024/02/02 15:52:03 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv, char **envp)
 	set_signal();
 	while (1)
 	{
-		print_prompt(&line);
+		print_prompt(&line, data);
 		if (parsing(&data, line) || update_arg(&data)
 			|| exec_heredoc(data, data->command))
 		{

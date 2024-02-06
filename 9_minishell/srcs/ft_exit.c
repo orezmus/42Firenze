@@ -6,7 +6,7 @@
 /*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:18:58 by sum               #+#    #+#             */
-/*   Updated: 2024/01/29 18:21:38 by femorell         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:56:10 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ void
 		return ;
 	print_error("exit", str, "numeric argument required");
 	if (data->arg == 1)
+	{
+		free_shell(data);
+		close_fd();
 		exit(255);
+	}
 }
 
 void	ft_exit_arg(t_data *data, t_list *command)
@@ -56,6 +60,8 @@ void	ft_exit_arg(t_data *data, t_list *command)
 		{
 			rt = ft_atoi(((t_cmd *)command->content)->line);
 			exit_status(NULL, (rt & 255));
+			free_shell(data);
+			close_fd();
 			exit(rt & 255);
 		}
 		else if (data->arg == 1)
@@ -74,6 +80,8 @@ void	ft_exit(t_data *data, t_list *command)
 	if (!command->next)
 	{
 		printf("exit\n");
+		free_shell(data);
+		close_fd();
 		exit(0);
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:07:29 by sum               #+#    #+#             */
-/*   Updated: 2024/01/30 18:19:46 by sum              ###   ########.fr       */
+/*   Updated: 2024/02/03 13:38:35 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@
 # define PIPE 			7
 # define DQUOTE 		8
 # define SQUOTE			9
-# define ARG			10
 
-# define BUILTIN		51
-# define CMD			52
+# define BUILTIN		10
+# define CMD			11
+# define ARG			12
 
 # define DIR			88
 # define FILE			89
@@ -78,9 +78,10 @@ void	set_signal(void);
 void	unlink_heredoc(t_data *data);
 
 void	fd_backup(t_data *data, int *stdin, int *stdout);
-void	print_prompt(char **input);
-
+void	print_prompt(char **input, t_data *data);
+void	free_shell(t_data *data);
 void	close_fd(void);
+void	extract_meta(int *i, char *line, t_data **data);
 
 // prompt_utils.c
 void	escape_quote(char *next_line, char **input, char escape_type);
@@ -130,6 +131,7 @@ void	exec_list(t_data *data, t_list *command);
 void	init_execute(t_data **data);
 void	exec_builtin(t_data *data, t_list *command);
 
+void	exec_file(t_data *data, t_list *command);
 void	exec_cmd(t_data *data, t_list *command);
 
 // heredoc.c

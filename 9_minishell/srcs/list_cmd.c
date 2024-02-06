@@ -6,7 +6,7 @@
 /*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:39:02 by femorell          #+#    #+#             */
-/*   Updated: 2024/01/29 18:42:02 by femorell         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:23:25 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ void	free_list(t_data *data)
 		current = next;
 	}
 	data->command = NULL;
+}
+
+void	free_shell(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	free_list(data);
+	while (data->argv[++i])
+		free(data->argv[i]);
+	free(data->argv);
+	i = -1;
+	while (data->envp[++i])
+		free(data->envp[i]);
+	free(data->envp);
+	free(data);
 }
 
 void	add_list(t_data **data, char *line, int type)

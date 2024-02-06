@@ -6,7 +6,7 @@
 #    By: sum <sum@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 22:04:32 by sum               #+#    #+#              #
-#    Updated: 2024/01/30 18:39:04 by sum              ###   ########.fr        #
+#    Updated: 2024/02/02 14:33:46 by sum              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,13 @@ SRCS_LIST = minishell.c \
 	signal.c \
 	check.c \
 	parsing.c \
+	parsing2.c \
 	list_cmd.c \
 	utils.c \
 	update.c \
 	error.c \
 	exec_cmd.c \
+	exec_file.c \
 	builtin.c \
 	execute.c \
 	redirect.c \

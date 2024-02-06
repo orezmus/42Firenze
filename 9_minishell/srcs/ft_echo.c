@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <sum@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 23:15:54 by sum               #+#    #+#             */
-/*   Updated: 2024/01/29 13:53:53 by sum              ###   ########.fr       */
+/*   Updated: 2024/02/03 11:21:55 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 
 int	ft_echo_no_nl(t_list *command)
 {
-	if (!command->next && ((t_cmd *)command->next->content)->type > PIPE)
+	if (!command->next || ((t_cmd *)command->next->content)->type == PIPE)
 		return (0);
 	else
 	{
 		command = command->next;
-		while (command && ((t_cmd *)command->content)->type > PIPE)
+		while (command && ((t_cmd *)command->content)->type != PIPE)
 		{
-			ft_putstr_fd(((t_cmd *)command->content)->line, 1);
-			if (command->next)
-				ft_putstr_fd(" ", 1);
+			if (command && ((t_cmd *)command->content)->type > PIPE && \
+				((t_cmd *)command->content)->type < DIR)
+			{
+				printf("%s", ((t_cmd *)command->content)->line);
+				if (command->next && \
+					((t_cmd *)command->next->content)->type > PIPE && \
+					((t_cmd *)command->next->content)->type < DIR)
+					printf(" ");
+			}
 			command = command->next;
 		}
 	}
@@ -32,11 +38,17 @@ int	ft_echo_no_nl(t_list *command)
 
 int	ft_echo_arg(t_list *command)
 {
-	while (command && ((t_cmd *)command->content)->type > PIPE)
+	while (command && ((t_cmd *)command->content)->type != PIPE)
 	{
-		printf("%s", ((t_cmd *)command->content)->line);
-		if (command->next)
-			printf(" ");
+		if (command && ((t_cmd *)command->content)->type > PIPE && \
+			((t_cmd *)command->content)->type < DIR)
+		{
+			printf("%s", ((t_cmd *)command->content)->line);
+			if (command->next && \
+				((t_cmd *)command->next->content)->type > PIPE && \
+				((t_cmd *)command->next->content)->type < DIR)
+				printf(" ");
+		}
 		command = command->next;
 	}
 	printf("\n");
@@ -62,11 +74,12 @@ int	check_nl(char *line)
 
 void	ft_echo(t_list *command)
 {
-	if (!command->next || ((t_cmd *)command->next->content)->type <= PIPE)
+	if (!command->next || ((t_cmd *)command->next->content)->type == PIPE)
 		write(1, "\n", 1);
 	else if (!ft_strncmp(((t_cmd *)command->next->content)->line, "-n", 2))
 	{
-		while (check_nl(((t_cmd *)command->next->content)->line))
+		while (command->next
+			&& check_nl(((t_cmd *)command->next->content)->line))
 			command = command->next;
 		ft_echo_no_nl(command);
 	}
