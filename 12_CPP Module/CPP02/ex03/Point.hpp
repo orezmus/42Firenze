@@ -12,10 +12,13 @@ public:
     Point();
     Point(const float x, const float y);
     Point(const Point &copy);
-    Point& :operator=(const Point &copy);
+    Point& operator=(const Point &copy);
     ~Point();
+
+    const Fixed& getX(void) const;
+    const Fixed& getY(void) const;
 };
 
-bool bsp(Point const a, Point const b, Pint const c, Point const point);
+bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif
