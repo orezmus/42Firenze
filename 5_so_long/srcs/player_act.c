@@ -17,16 +17,18 @@ int	player_actcode(int keycode)
 	int	action;
 
 	action = 0;
-	if (keycode == A || keycode == ARROW_LEFT)
+	if (keycode == A)
 		action = 1;
-	else if (keycode == S || keycode == ARROW_DOWN)
+	else if (keycode == S)
 		action = 2;
-	else if (keycode == D || keycode == ARROW_RIGHT)
+	else if (keycode == D
 		action = 3;
-	else if (keycode == W || keycode == ARROW_UP)
+	else if (keycode == W)
 		action = 4;
-	else if (keycode == E || keycode == N_ZERO)
-		action = 5;
+	else if (keycode == ARROW_LEFT)
+		action = 1;
+	else if (keycode == ARROW_RIGHT)
+		action = 3;
 	return (action);
 }
 
