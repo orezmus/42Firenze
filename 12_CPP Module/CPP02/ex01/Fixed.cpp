@@ -18,13 +18,13 @@ Fixed::Fixed(const float y) : fixedPoint_(0) {
 
 Fixed::Fixed(const Fixed &copy) {
 	std::cout << "Copy constructor called" << std::endl;
-	(*this) = copy;
+	fixedPoint_ = copy.getRawBits();
 }
 
 Fixed& Fixed::operator=(const Fixed &copy) {
 	std::cout << "Copy assignment operator called" << std::endl;
 	fixedPoint_ = copy.getRawBits();
-    return (*this);
+	return (*this);
 }
 
 Fixed::~Fixed() {

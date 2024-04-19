@@ -14,12 +14,12 @@ Fixed::Fixed(const float y) : fixedPoint_(0) {
 }
 
 Fixed::Fixed(const Fixed &copy) {
-	(*this) = copy;
+	fixedPoint_ = copy.getRawBits();
 }
 
 Fixed& Fixed::operator=(const Fixed &copy) {
 	fixedPoint_ = copy.getRawBits();
-    return (*this);
+	return (*this);
 }
 
 Fixed::~Fixed() {

@@ -1,10 +1,9 @@
-NAME = fixed
+NAME = clapTrap
 CC = clang++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -fPIE
 
 SRCS = main.cpp\
-	Fixed.cpp\
-	Point.cpp
+	ClapTrap.cpp
 
 OBJS_DIR = objs
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
