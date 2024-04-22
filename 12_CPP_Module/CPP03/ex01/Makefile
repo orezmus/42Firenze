@@ -1,10 +1,10 @@
-NAME = zombie
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME = clapTrap
+CC = clang++
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -fPIE
 
 SRCS = main.cpp\
-	zombieHorde.cpp\
-	Zombie.cpp
+	ClapTrap.cpp\
+	ScavTrap.cpp
 
 OBJS_DIR = objs
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
