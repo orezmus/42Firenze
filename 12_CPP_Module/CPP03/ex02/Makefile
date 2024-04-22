@@ -1,9 +1,11 @@
-NAME = clapTrap
+NAME = fregTrap
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -fPIE
 
 SRCS = main.cpp\
-	ClapTrap.cpp
+	ClapTrap.cpp\
+	ScavTrap.cpp\
+	FragTrap.cpp
 
 OBJS_DIR = objs
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))

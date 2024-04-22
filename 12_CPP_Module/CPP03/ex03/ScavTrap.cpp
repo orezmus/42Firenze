@@ -38,9 +38,8 @@ ScavTrap::~ScavTrap() {
 void ScavTrap::attack(const std::string& target) {
 	if (!isAlive() || !hasEnergy())
 		return ;
-	std::cout << "ScavTrap " << name_ << " attacks ";
-	std::cout << target << ", causing " << damage_;
-	std::cout << " point of damage" << std::endl;
+	std::cout << "ScavTrap " << name_ << " attacks " << target;
+	std::cout <<  ", causing " << damage_ << " point of damage" << std::endl;
 	energy_--;
 	std::cout << "ScavTrap " << name_ << " has energy point: " << energy_ << std::endl;
 }

@@ -15,13 +15,13 @@ int main(void)
 	}
 
 	c1.beRepaired(10);
-    std::cout << std::endl;
-
-    ClapTrap c3(c1);
-	ClapTrap c4;
-    c4 = c2;
 	std::cout << std::endl;
-    while (c3.isAlive() && c4.isAlive() && c3.hasEnergy() && c4.hasEnergy())
+
+	ClapTrap c3(c1);
+	ClapTrap c4;
+	c4 = c2;
+	std::cout << std::endl;
+	while (c3.isAlive() && c4.isAlive() && c3.hasEnergy() && c4.hasEnergy())
 	{
 		c4.attack("Tom");
 		c3.takeDamage(c4.getDamage());
