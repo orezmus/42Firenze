@@ -1,12 +1,15 @@
-NAME = fixed
+NAME = fire
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
-
-SRCS = main.cpp\
-	Fixed.cpp
-
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -fPIE
+	
+SRCS_LIST = main.cpp\
+	Animal.cpp\
+	Cat.cpp\
+	Dog.cpp\
+	Brain.cpp\
+	
 OBJS_DIR = objs
-OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
 
 GREEN = \033[1;32m
 RED = \033[0;31m

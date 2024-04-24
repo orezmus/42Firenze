@@ -37,11 +37,11 @@ DiamondTrap::~DiamondTrap() {
 }
 
 void DiamondTrap::attack(const std::string& target) {
-    ScavTrap::attack(target);
+	ScavTrap::attack(target);
 }
 
 void DiamondTrap::whoAmI() {
-    std::cout << "Who am I?" << std::endl;  
-    std::cout << "DiamondTrap name: " << name_ << std::endl;
-    std::cout << "DiamondTrap's ClapTrap name: " << ClapTrap::name_ << std::endl;
+	std::cout << "Who am I?" << std::endl;  
+	std::cout << "DiamondTrap name: " << name_ << std::endl;
+	std::cout << "DiamondTrap's ClapTrap name: " << ClapTrap::name_ << std::endl;
 }

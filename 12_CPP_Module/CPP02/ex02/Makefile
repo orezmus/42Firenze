@@ -9,27 +9,29 @@ OBJS_DIR = objs
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 
 GREEN = \033[1;32m
-RED = \033[1;31m
+RED = \033[0;31m
+BLUE = \033[0;34m
 RESET = \033[m
 
 $(OBJS_DIR)/%.o : %.cpp
 	mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
-
+	@echo "$(BLUE)Compiling$(RESET) $<... $(GREEN)Done$(RESET)"
+	
 all: $(NAME)
 
 $(NAME):$(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "$(GREEN)$(NAME): object files created$(RESET)"
-	@echo "$(GREEN)$(NAME): $(NAME) compiled$(RESET)"
+	@echo "$(NAME)... $(GREEN)Ready$(RESET)"
+
 
 clean:
 	@rm -rf $(OBJS_DIR)
-	@echo "$(RED)$(NAME): object files deleted$(RESET)"
+	@echo "$(RED)Removing$(RESET) object files... $(GREEN)Done$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(RED)$(NAME): $(NAME) deleted$(RESET)"
+	@echo "$(RED)Removing$(RESET) $(NAME)... $(GREEN)Done$(RESET)"
 
 re: fclean all	 
 

@@ -44,7 +44,7 @@ int main(void)
 	delete c;
 
 	std::cout << std::endl;
-	std::cout << "<Free Objs array>" << std::endl;
+	std::cout << "<Free Obj array>" << std::endl;
 	for (int k = 0 ; k < 6 ; k++) {
 		delete animal[k];
 	}

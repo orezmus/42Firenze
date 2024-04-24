@@ -1,12 +1,17 @@
-NAME = fixed
+NAME = abstract
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-
-SRCS = main.cpp\
-	Fixed.cpp
+	
+SRCS_LIST = main.cpp\
+	Animal.cpp\
+	Brain.cpp\
+	Cat.cpp\
+	Dog.cpp\
+	WrongAnimal.cpp\
+	WrongCat.cpp
 
 OBJS_DIR = objs
-OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
 
 GREEN = \033[1;32m
 RED = \033[0;31m
