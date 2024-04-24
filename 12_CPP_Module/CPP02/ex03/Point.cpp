@@ -14,7 +14,7 @@ Point::Point(const Point &copy) : x_(copy.x_), y_(copy.y_) {
 
 Point& Point::operator=(const Point &copy) {
 	const_cast<Fixed&>(x_) = copy.x_;
-	const_cast<Fixed&>(x_) = copy.y_;
+	const_cast<Fixed&>(y_) = copy.y_;
 	return (*this);
 }
 
@@ -37,8 +37,17 @@ Fixed getArea(Point const a, Point const b, Point const c) {
 }
 
 bool bsp(Point const a, Point const b, Point const c, Point const point) {
-	if (getArea(a, b, c) == getArea(a, b, point) + getArea(a, point, c) + getArea(point, b, c))
-		return true;
-	else
-		return false;
+	
+	Fixed totalArea = getArea(a, b, c);
+	Fixed subArea1 = getArea(a, b, point);
+	Fixed subArea2 = getArea(a, point, c);
+	Fixed subArea3 = getArea(point, b, c);
+	
+	if (subArea1 + subArea2 + subArea3 == totalArea)
+	{
+		if (subArea1 == 0  || subArea2 == 0 || subArea3 == 0)
+			return (false);
+		return (true);
+	}
+	return (false);
 }

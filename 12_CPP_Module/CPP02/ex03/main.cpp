@@ -10,11 +10,12 @@ void	checkBsp(Point const a, Point const b, Point const c, Point const point)
 
 int	main( void ) 
 {
-	Point a1(8, 3);
-	Point b1(5, 9);
-	Point c1(1, 1);
-	Point p1(4, 4);
-	Point p2(4, 1);
+	Point a1(0, 0);
+	Point b1(4, 4);
+	Point c1(4, 0);
+	Point p1(4, 0);
+	Point p2(2, 1);
+
 
 	Point a2(5.5, -2.5);
 	Point b2(2.5, -5.0);
