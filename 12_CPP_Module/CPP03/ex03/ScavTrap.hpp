@@ -5,6 +5,8 @@
 #include <string>
 
 class ScavTrap : virtual public ClapTrap {
+protected:
+	unsigned int scavEnergy_;
 public:
 	bool guardMode;
 

@@ -4,6 +4,7 @@ ScavTrap::ScavTrap() : ClapTrap() {
 	hp_ = 100;
 	energy_ = 50;
 	damage_ = 20;
+	scavEnergy_ = energy_;
 	guardMode = false;
 	std::cout << "ScavTrap " << name_ << " constructor called" << std::endl;
 }
@@ -12,6 +13,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 	hp_ = 100;
 	energy_ = 50;
 	damage_ = 20;
+	scavEnergy_ = energy_;
 	guardMode = false;
 	std::cout << "ScavTrap named constructor called: " << name_ << std::endl;
 }

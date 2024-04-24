@@ -16,8 +16,7 @@ public:
 
 	void attack(const std::string& target);
     void whoAmI();
-
-
+	
 };
 
 #endif

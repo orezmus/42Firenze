@@ -1,12 +1,13 @@
-NAME = diamondTrap
+NAME = polymorphism
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -fPIE
 
 SRCS = main.cpp\
-	ClapTrap.cpp\
-	ScavTrap.cpp\
-	FragTrap.cpp\
-	DiamondTrap.cpp
+	Animal.cpp\
+	Dog.cpp\
+	Cat.cpp\
+	WrongAnimal.cpp\
+	WrongCat.cpp
 
 OBJS_DIR = objs
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))

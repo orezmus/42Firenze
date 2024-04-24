@@ -1,23 +1,23 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap(), name_(ClapTrap::name_) {
+DiamondTrap::DiamondTrap() : ClapTrap(), name_(ClapTrap::name_) {
 	ClapTrap::name_ += "_clap_name";
-    hp_ = FragTrap::hp_;
-	energy_ = ScavTrap::energy_;
-	damage_ = FragTrap::hp_;
-	//guardMode = false;
+	hp_ = FragTrap::hp_;
+	energy_ = ScavTrap::scavEnergy_;
+	damage_ = FragTrap::damage_;
+	guardMode = false;
 	std::cout << "DiamondTrap " << name_ << " constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name), name_(name) {
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), name_(name) {
 	hp_ = FragTrap::hp_;
 	energy_ = ScavTrap::energy_;
-	damage_ = FragTrap::hp_;
-	//guardMode = false;
+	damage_ = FragTrap::damage_;
+	guardMode = false;
 	std::cout << "DiamondTrap named constructor called: " << name_ << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &copy) : ClapTrap(copy) {
+DiamondTrap::DiamondTrap(const DiamondTrap &copy) : ClapTrap(copy), ScavTrap(copy), FragTrap(copy), name_(copy.name_){
 	guardMode = copy.guardMode;
 	std::cout << "DiamondTrap copy constructor called: " << name_ << std::endl;
 }
