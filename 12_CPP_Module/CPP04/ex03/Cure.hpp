@@ -6,15 +6,14 @@
 #include <string>
 
 class Cure : public AMateria {
-private:
-    std::string type_;
 public:
     Cure();
+    Cure(std::string const &type);
     Cure(const Cure &copy);
     Cure &operator=(const Cure &copy);
     ~Cure();
 
-    Cure *clone() const;
+    AMateria *clone() const;
     void use(ICharacter &target);
 };
 

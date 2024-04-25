@@ -1,21 +1,25 @@
 #include "Ice.hpp"
 
-Ice::Ice () {
-    type_ = "ice";
+Ice::Ice () : AMateria("ice") {
 }
 
-Ice::Ice(const Ice &copy) : AMateria() {
+Ice::Ice(std::string const &type) : AMateria(type) {
+}
+
+Ice::Ice(const Ice &copy) : AMateria(copy) {
     type_ = copy.type_;
 }
 
 Ice& Ice::operator=(const Ice &copy) {
     if (this != &copy)
+    {
         AMateria::operator=(copy);
+        type_ = copy.getType();
+    }
     return (*this);
 }
 
 Ice::~Ice() {
-
 }
 
 void Ice::use(ICharacter &target) {
