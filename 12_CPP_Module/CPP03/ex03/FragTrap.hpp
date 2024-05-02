@@ -4,6 +4,9 @@
 #include "ClapTrap.hpp"
 
 class FragTrap : virtual public ClapTrap {
+protected:
+	unsigned int fragHp_;
+	unsigned int fragDamage_;
 public:
 	FragTrap();
 	FragTrap(std::string name);

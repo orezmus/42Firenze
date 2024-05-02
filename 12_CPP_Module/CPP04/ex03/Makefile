@@ -1,14 +1,16 @@
-NAME = fragTrap
+NAME = interface
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -fPIE
-
-SRCS = main.cpp\
-	ClapTrap.cpp\
-	ScavTrap.cpp\
-	FragTrap.cpp
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 	
+SRCS_LIST = main.cpp\
+	AMateria.cpp\
+	Character.cpp\
+	Cure.cpp\
+	Ice.cpp\
+	MateriaSource.cpp
+
 OBJS_DIR = objs
-OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
 
 GREEN = \033[1;32m
 RED = \033[0;31m

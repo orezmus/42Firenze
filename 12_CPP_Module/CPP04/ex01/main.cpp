@@ -15,15 +15,12 @@ int main(void)
 			animal[i] = new Cat();
 	}
 	std::cout << std::endl;
-	const Animal* d = new Dog();
-	const Animal* c = new Cat();
-	std::cout << std::endl;
 
 	std::cout << "<Create new Obj>" << std::endl;
 	Dog *d1 = new Dog();
 	std::cout << std::endl;
 
-	std::cout << "<Create new Obj>" << std::endl;
+	std::cout << "<Copy>" << std::endl;
 	Dog *d2 = new Dog(*d1);
 	std::cout << std::endl;
 
@@ -31,7 +28,7 @@ int main(void)
 	Dog *d3 = new Dog();
 	std::cout << std::endl;
 
-	std::cout << "<Assignation>" << std::endl;
+	std::cout << "<Assignation copy>" << std::endl;
 	*d3 = *d2;
 
 	std::cout << std::endl;
@@ -39,9 +36,6 @@ int main(void)
 	delete d3;
 	delete d2;
 	delete d1;
-
-	delete d;
-	delete c;
 
 	std::cout << std::endl;
 	std::cout << "<Free Obj array>" << std::endl;
