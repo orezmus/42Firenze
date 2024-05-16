@@ -1,31 +1,52 @@
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-int main(void)
-{
-	try {
-		std::cout << "==========test1==========" << std::endl;
-		Bureaucrat a("test1", 10);
-		Bureaucrat b("test2", -1); // GradeTooHighException
-		std::cout << "Next Line" << std::endl; // Skip
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+int main(void) {
+
+	Bureaucrat b1("b1", 30);
+	Bureaucrat b2("b2", 70);
+	
+	try
+	{
+		std::cout << "=========Test 1=========" << std::endl;
+		Form f1("f1", 50, 70);
+		
+
+		b1.signForm(f1);
+		b2.signForm(f1);
+		std::cout << std::endl;
+
+		std::cout << f1 << std::endl;
+		std::cout << std::endl;
+		Form f2("f2", 100, 151);
+		
+		std::cout << f2 << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
 	}
 
-	try {
-		std::cout << "==========test2==========" << std::endl;
-		Bureaucrat b("test2", 151); // GradeTooLowException
-		std::cout << "Next Line" << std::endl; // Skip
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
+	std::cout << std::endl;
 
-	try {
-		std::cout << "==========test3==========" << std::endl;
-		Bureaucrat c("test3", 20);
-		std::cout << c << std::endl; // output operator overloading
-		c.increment(10); // grade : 10
-		c.decrement(150); // grade : 160 -> GradeTooLowException
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+	try
+	{
+		std::cout << "=========Test 2=========" << std::endl;
+		Form f3("f3", 50, 70);
+		Form f4 = f3;
+
+		b1.signForm(f3);
+		b2.signForm(f4);
+		std::cout << std::endl;
+
+		std::cout << f3 << std::endl;
+		std::cout << std::endl;
+		std::cout << f4 << std::endl;
+		std::cout << std::endl;
 	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	return (0);
 }

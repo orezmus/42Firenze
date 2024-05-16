@@ -1,5 +1,5 @@
-#ifndef MATERIASOURCE_H
-# define MATERIASOURCE_H
+#ifndef MATERIASOURCE_HPP
+# define MATERIASOURCE_HPP
 
 #include "IMateriaSource.hpp"
 

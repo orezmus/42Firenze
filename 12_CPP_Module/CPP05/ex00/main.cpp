@@ -2,30 +2,68 @@
 
 int main(void)
 {
-	try {
-		std::cout << "==========test1==========" << std::endl;
-		Bureaucrat a("test1", 10);
-		Bureaucrat b("test2", -1); // GradeTooHighException
-		std::cout << "Next Line" << std::endl; // Skip
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+	Bureaucrat b1("b1", 150);
+	Bureaucrat b2("b2", 1);
+	Bureaucrat b3("b3", 10);
+	Bureaucrat b4(b3);
+
+	std::cout << b1 << std::endl;
+	std::cout << b2 << std::endl;
+	std::cout << b3 << std::endl;
+	std::cout << b4 << std::endl;
+	std::cout << std::endl;
+
+	try
+	{
+
+		std::cout << "=========Test 1=========" << std::endl;
+		b1.decrement(2);
+		std::cout << b1 << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
 	}
 
-	try {
-		std::cout << "==========test2==========" << std::endl;
-		Bureaucrat b("test2", 151); // GradeTooLowException
-		std::cout << "Next Line" << std::endl; // Skip
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+	std::cout << std::endl;
+
+	try
+	{
+		std::cout << "=========Test 2=========" << std::endl;
+		b2.increment(2);
+		std::cout << b2 << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	
+	std::cout << std::endl;
+
+	try
+	{
+		std::cout << "=========Test 3=========" << std::endl;
+		b3.increment(2);
+		std::cout << b3 << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
 	}
 
-	try {
-		std::cout << "==========test3==========" << std::endl;
-		Bureaucrat c("test3", 20);
-		std::cout << c << std::endl; // output operator overloading
-		c.increment(10); // grade : 10
-		c.decrement(150); // grade : 160 -> GradeTooLowException
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+	std::cout << std::endl;
+
+	try
+	{
+		std::cout << "=========Test 4=========" << std::endl;
+		b4.decrement(2);
+		std::cout << b4 << std::endl;
 	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+
+	return 0;
 }

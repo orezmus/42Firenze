@@ -1,5 +1,5 @@
-#ifndef CURE_H
-# define CURE_H
+#ifndef CURE_HPP
+# define CURE_HPP
 
 #include "AMateria.hpp"
 #include "ICharacter.hpp"

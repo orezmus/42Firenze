@@ -1,5 +1,5 @@
-#ifndef ICHARACTER_H
-# define ICHARACTER_H
+#ifndef ICHARACTER_HPP
+# define ICHARACTER_HPP
 
 #include "AMateria.hpp"
 

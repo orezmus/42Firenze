@@ -1,5 +1,5 @@
-#ifndef AMATERIA_H
-# define AMATERIA_H
+#ifndef AMATERIA_HPP
+# define AMATERIA_HPP
 
 #include <iostream>
 #include <string>
