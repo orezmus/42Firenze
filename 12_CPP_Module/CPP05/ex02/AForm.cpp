@@ -62,7 +62,7 @@ bool AForm::canExecute(Bureaucrat const& executor) const {
 }
 
 const char *AForm::GradeTooHighException::what() const throw() {
-	return "Grade is too hight!";
+	return "Grade is too high!";
 }
 
 const char *AForm::GradeTooLowException::what() const throw() {

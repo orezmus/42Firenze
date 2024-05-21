@@ -74,7 +74,7 @@ void Bureaucrat::executeForm(AForm const& f) {
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
-	return "Grade is too hight!";
+	return "Grade is too high!";
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw() {

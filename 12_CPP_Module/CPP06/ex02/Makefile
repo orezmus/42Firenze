@@ -1,9 +1,8 @@
-NAME = conversion
+NAME = identify
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 	
-SRCS_LIST = main.cpp\
-	ScalarConverter.cpp
+SRCS_LIST = main.cpp
 
 OBJS_DIR = objs
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_LIST:.cpp=.o))
