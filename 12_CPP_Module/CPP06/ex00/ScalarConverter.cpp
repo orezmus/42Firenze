@@ -27,15 +27,15 @@ static bool checkChar(const std::string &literal) {
 
 static bool checkPseudo(const std::string &literal) {
 	if (literal == "nan" || literal == "nanf" || literal == "+inf" 
-	|| literal == "+inff" || literal == "-inf" || literal == "-inff")
+		|| literal == "+inff" || literal == "-inf" || literal == "-inff")
 		return true;
 	return false;
 }
 
 static bool checkDisplayable(int c) {
-    if (c >= 32 && c <= 126)
-        return true;
-    return false;
+	if (c >= 32 && c <= 126)
+		return true;
+	return false;
 }
 
 void toChar(const std::string &literal) {
