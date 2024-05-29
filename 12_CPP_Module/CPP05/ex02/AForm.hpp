@@ -12,38 +12,38 @@ private:
 	const int gradeSign_;
 	const int gradeExecute_;
 public:
-	    AForm();
-	    AForm(std::string name, const int &gradeSign, const int &gradeExecute);
-	    AForm(const AForm &copy);
-	    AForm& operator=(const AForm &copy);
-	    virtual ~AForm();
+	AForm();
+	AForm(std::string name, const int &gradeSign, const int &gradeExecute);
+	AForm(const AForm &copy);
+	AForm& operator=(const AForm &copy);
+	virtual ~AForm();
 
-	    std::string getName() const;
-	    bool getSigned() const;
-	    int getGradeSign() const;
-	    int getGradeExecute() const;
+	std::string getName() const;
+	bool getSigned() const;
+	int getGradeSign() const;
+	int getGradeExecute() const;
 
-	    void beSigned(Bureaucrat& br);
+	void beSigned(Bureaucrat& br);
 
-	    virtual void execute(Bureaucrat const& executor) const = 0;
-	    bool canExecute(Bureaucrat const& executor) const;
+	virtual void execute(Bureaucrat const& executor) const = 0;
+	bool canExecute(Bureaucrat const& executor) const;
 
-	    class GradeTooHighException : public std::exception {
-	    public:
-		const char *what() const throw();
-	    };
-	    class GradeTooLowException : public std::exception {
-	    public:
-		const char *what () const throw();
-	    };
-	    class NotSignedException : public std::exception {
-	    public:
-		const char *what() const throw();
-	    };
-	    class OpenFailException : public std::exception {
-	    public:
-		const char *what() const throw();
-	    };
+	class GradeTooHighException : public std::exception {
+	public:
+	const char *what() const throw();
+	};
+	class GradeTooLowException : public std::exception {
+	public:
+	const char *what () const throw();
+	};
+	class NotSignedException : public std::exception {
+	public:
+	const char *what() const throw();
+	};
+	class OpenFailException : public std::exception {
+	public:
+	const char *what() const throw();
+	};
 };
 
 std::ostream& operator<<(std::ostream& os, const AForm& f);

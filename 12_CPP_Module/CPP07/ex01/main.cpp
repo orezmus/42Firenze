@@ -1,7 +1,6 @@
 #include "iter.hpp"
 #include <string>
 
-
 int main(void)
 {
 	char carr[5] = { 'a', 'b', 'c', 'd', 'e' };
