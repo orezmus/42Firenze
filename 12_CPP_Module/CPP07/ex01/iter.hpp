@@ -5,14 +5,14 @@
 
 template <typename T>
 void iter(T *arr, int len, void (*f)(const T&)) {
-    for (int i = 0; i < len; i++)
-        f(arr[i]);
+	for (int i = 0; i < len; i++)
+		f(arr[i]);
 }
 
 template <typename T>
 void print(const T& arg) {
-    std::cout << arg << std::endl;
-    return;
+	std::cout << arg << std::endl;
+	return;
 }
 
 #endif

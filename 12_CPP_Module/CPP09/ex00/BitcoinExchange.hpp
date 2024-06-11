@@ -4,20 +4,25 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 
-class BitcoinDatabase {
+class BitcoinExchange {
 private:
-	std::map<std::string, double> prices_;
+	std::map<std::string, float> prices_;
+	
+	bool isValideDate(const std::string &date);
+	bool isValideValue(const std::string &valueSTr);
+	
+	float getBitcoinPrice(const std::string &data);
 public:
-	BitcoinDatabase();
-	BitcoinDatabase(const BitcoinDatabase &copy);
-	BitcoinDatabase& operator=(const BitcoinDatabase &copy);
-	~BitcoinDatabase();
+	BitcoinExchange();
+	BitcoinExchange(const BitcoinExchange &copy);
+	BitcoinExchange& operator=(const BitcoinExchange &copy);
+	~BitcoinExchange();
 
 	bool readCSV(const std::string &filename);
-	double getBitcoinPrice(const std::string &data);
 	
 	void readInput(const std::string &filename);
 };

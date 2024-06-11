@@ -39,7 +39,6 @@ void Span::addNumber(std::vector<int>::iterator const &begin, std::vector<int>::
 	}
 }
 
-
 int Span::shortestSpan() {
 	if (v_.size() < 2)
 		throw NotEnoughNumbersException();

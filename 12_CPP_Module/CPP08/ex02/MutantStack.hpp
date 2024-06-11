@@ -6,16 +6,16 @@
 template <typename T>
 class MutantStack : public std::stack<T> {
 public:
-    typedef typename std::stack<T>::container_type::iterator iterator;
-    MutantStack();
-    MutantStack(const MutantStack &copy);
-    MutantStack& operator=(const MutantStack &copy);
-    ~MutantStack();
+typedef typename std::stack<T>::container_type::iterator iterator;
+	MutantStack();
+	MutantStack(const MutantStack &copy);
+	MutantStack& operator=(const MutantStack &copy);
+	~MutantStack();
 
-    iterator begin();
-    iterator end();
-    iterator rbegin();
-    iterator rend();
+	iterator begin();
+	iterator end();
+	iterator rbegin();
+	iterator rend();
 };
 
 #include "MutantStack.tpp"

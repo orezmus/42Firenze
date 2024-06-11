@@ -4,15 +4,15 @@ Array<T>::Array() : arr_(new T[0]), size_(0) {
 
 template <class T>
 Array<T>::Array(unsigned int n) : arr_(new T[n]), size_(n) {
-    for (int i = 0; i < size_; i++)
-        arr_[i] = 0;
+	for (int i = 0; i < size_; i++)
+		arr_[i] = 0;
 }
 
 template<class T>
 Array<T>::Array(const Array &copy) {
-    arr_ = new T[copy.size_];
-    size_ = copy.size_;
-    for (int i = 0 ; i < copy.size_ ; i++) {
+	arr_ = new T[copy.size_];
+	size_ = copy.size_;
+	for (int i = 0 ; i < copy.size_ ; i++) {
 		arr_[i] = copy.arr_[i];
 	}
 }
@@ -20,22 +20,22 @@ Array<T>::Array(const Array &copy) {
 template <class T>
 Array<T> &Array<T>::operator=(const Array &copy) {
 	if (this != &copy)
-     {
-        delete arr_;
-        arr_ = NULL;
-        arr_ = new T[copy.size_];
-        size_ = copy.size_;
-     }
+	 {
+		delete arr_;
+		arr_ = NULL;
+		arr_ = new T[copy.size_];
+		size_ = copy.size_;
+	 }
 	for (int i = 0 ; i < copy.size_ ; i++) {
 		arr_[i] = copy.arr_[i];
 	}
-    return (*this);
+	return (*this);
 }
 
 template <class T>
 Array<T>::~Array() {
-    delete[] arr_;
-    arr_ = NULL;
+	delete[] arr_;
+	arr_ = NULL;
 }
 
 template<class T>
