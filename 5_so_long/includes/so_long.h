@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: femorell <femorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/19 13:36:35 by sum               #+#    #+#             */
-/*   Updated: 2023/01/19 13:36:54 by sum              ###   ########.fr       */
+/*   Created: 2023/03/13 15:26:09 by femorell          #+#    #+#             */
+/*   Updated: 2023/03/17 11:58:08 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 # include <stdio.h>
 
 # include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
 # include "../libft/ft_printf/ft_printf.h"
+# include "../minilibx-linux/mlx.h"
 
 # define TRUE			0
 # define FALSE			1
 
 # define LEFT 			1
-# define RIGHT 		2
+# define RIGHT 			2
 
 # define TILE_SIZE		32
 # define NB 			16
@@ -33,12 +33,9 @@
 # define WALL			'1' 
 # define FLOOR			'0'
 # define COIN			'C'
-# define PLAYER		'P'
+# define PLAYER			'P'
 # define EXIT			'E'
-# define MONSTER		'M'
 # define FRAME			'F'
-# define FLOWER		'*'
-# define FLOWER2		'+'
 
 # define W 				119
 # define ARROW_UP 		65362
@@ -47,7 +44,7 @@
 # define A 				97
 # define ARROW_LEFT		65361
 # define D 				100
-# define ARROW_RIGHT		65363
+# define ARROW_RIGHT	65363
 # define E				101
 # define N_ZERO			65438
 
@@ -59,12 +56,9 @@
 # define CFRAME_XPM		"assets/wall/frame/cframe"
 # define WALL_XPM		"assets/wall/wall"
 # define FLOOR_XPM		"assets/other/floor"
-# define FLOWER_XPM		"assets/other/flower"
 # define COIN_XPM		"assets/coin/coin"
 # define EXIT_XPM		"assets/exit/exit"
 # define PLAYER_XPM		"assets/player/dino"
-# define MONSTER_XPM		"assets/monster/slime/slime"
-# define SMONSTER_XPM		"assets/monster/shadow/slime"
 
 typedef struct s_image {
 	void	*image;
@@ -119,7 +113,6 @@ typedef struct s_game {
 	t_alloc		*img_alloc;
 }		t_game;
 
-long long	check_timestamp(void);
 void		exit_error(int i, char *msg, t_game *game);
 
 int			kill_hook(t_game *game);
@@ -133,7 +126,7 @@ void		player_disact(int keycode, t_game *game);
 void		game_init(t_game *game);
 
 void		map_read(t_game *game, char *filename);
-void		map_check(t_game *game);
+void		map_check(t_game *game, char *filename);
 void		map_render(t_game *game);
 void		map_check_parameter(t_game *game);
 int			map_count_parameter(t_game *game);
@@ -147,7 +140,7 @@ void		coin_init(t_game *game, t_image *map);
 
 void		exit_init(t_game *game, t_image *map);
 
-void		map_create(t_game *game);
+void		create_map(t_game *game);
 
 int			create_trgb(int t, int r, int g, int b);
 void		construct_image(char *buffer, t_vector pos,
@@ -167,5 +160,9 @@ int			player_stay_img(int *last_img, t_game *game);
 void		player_status(t_game *game);
 
 void		free_game(t_game *game);
+
+char		**map_init(char *filename);
+void		ft_free_matrix(char **matrix);
+int			ft_pathcheck(t_game *game, char *filename);
 
 #endif

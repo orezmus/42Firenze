@@ -21,7 +21,7 @@ int	player_actcode(int keycode)
 		action = 1;
 	else if (keycode == S)
 		action = 2;
-	else if (keycode == D
+	else if (keycode == D)
 		action = 3;
 	else if (keycode == W)
 		action = 4;

@@ -1,5 +1,5 @@
 /* XPM */
-static char * wall2_xpm[] = {
+static char * wall1_xpm[] = {
 "32 32 5 1",
 " 	c #4DA6FF",
 ".	c #EB9C6E",
@@ -34,7 +34,7 @@ static char * wall2_xpm[] = {
 "                                ",
 "                                ",
 "                                ",
-"..                              ",
-"++.                             ",
-"@++.                            ",
-"#@+.                            "};
+"                              ..",
+"                             .++",
+"                            .++@",
+"                            .+@#"};

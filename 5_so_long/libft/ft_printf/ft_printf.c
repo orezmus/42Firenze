@@ -3,48 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: femorell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 17:58:11 by sum               #+#    #+#             */
-/*   Updated: 2022/10/10 17:59:42 by sum              ###   ########.fr       */
+/*   Created: 2022/10/26 15:53:59 by femorell          #+#    #+#             */
+/*   Updated: 2022/10/26 15:58:50 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_format(const char *format, va_list *ap, int *len)
+static int	ft_takeinput(va_list ap, char c)
 {
-	if (*format == 'c')
-		ft_putchar(va_arg(*ap, int), len);
-	else if (*format == 's')
-		ft_putstr(va_arg(*ap, char *), len);
-	else if (*format == 'p')
-		ft_pointer(va_arg(*ap, void *), len);
-	else if (*format == 'd' || *format == 'i')
-		ft_putnbr(va_arg(*ap, int), len);
-	else if (*format == 'u')
-		ft_unsigned(va_arg(*ap, unsigned int), len);
-	else if (*format == 'x' || *format == 'X')
-		ft_hexa(va_arg(*ap, int), format, len);
-	else if (*format == '%')
-		ft_putchar('%', len);
+	int	print;
+
+	print = 0;
+	if (c == 'c')
+		print = ft_putchar(va_arg(ap, int));
+	else if (c == 's')
+		print = ft_putstr(va_arg(ap, char *));
+	else if (c == 'p')
+		print = ft_pointer(va_arg(ap, unsigned long int));
+	else if (c == 'd' || c == 'i')
+		print = ft_digit(va_arg(ap, int));
+	else if (c == 'u')
+		print = ft_unsigned_int(va_arg(ap, unsigned int));
+	else if (c == 'x' || c == 'X')
+		print = ft_hexadecimal(va_arg(ap, unsigned int), c);
+	else if (c == '%')
+	{
+		write(1, "%", 1);
+		print = 1;
+	}
+	return (print);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	int		len;
+	int		print;
+	int		i;
 	va_list	ap;
 
-	len = 0;
+	i = 0;
+	print = 0;
 	va_start(ap, str);
-	while (*str)
+	while (str[i])
 	{
-		if (*str == '%')
-			ft_format(++str, &ap, &len);
+		if (str[i] == '%')
+		{
+			i++;
+			print += ft_takeinput(ap, str[i]);
+		}
 		else
-			ft_putchar(*str, &len);
-		str++;
+		{
+			ft_putchar(str[i]);
+			print += 1;
+		}
+		i++;
 	}
-	va_end (ap);
-	return (len);
+	va_end(ap);
+	return (print);
 }

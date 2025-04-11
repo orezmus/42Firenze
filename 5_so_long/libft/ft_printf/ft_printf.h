@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libfprintf.h                                       :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: femorell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 17:59:51 by sum               #+#    #+#             */
-/*   Updated: 2022/10/10 18:01:46 by sum              ###   ########.fr       */
+/*   Created: 2022/10/26 15:48:49 by femorell          #+#    #+#             */
+/*   Updated: 2022/10/26 16:44:21 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stddef.h>
 
-int		ft_printf(const char *str, ...);
-void	ft_hexa(unsigned long long nbr, const char *format, int *len);
-void	ft_pointer(void *addr, int *len);
-void	ft_putchar(char c, int *len);
-void	ft_putstr(char *str, int *len);
-void	ft_unsigned(unsigned int nb, int *len);
-void	ft_putnbr(int nb, int *len);
-void	ft_putnbr_base(int nbr, const char *format, int *len);
-void	ft_putchar(char c, int *len);
+int	ft_printf(const char *ap, ...);
+int	ft_putchar(int c);
+int	ft_putstr(char *str);
+int	ft_pointer(unsigned long int n);
+int	ft_digit(int n);
+int	ft_unsigned_int(unsigned int n);
+int	ft_hexadecimal(unsigned int n, char c);
 
 #endif

@@ -3,36 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pointer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: femorell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 15:14:41 by sum               #+#    #+#             */
-/*   Updated: 2022/10/21 15:14:45 by sum              ###   ########.fr       */
+/*   Created: 2022/11/21 17:06:41 by femorell          #+#    #+#             */
+/*   Updated: 2022/11/21 17:06:42 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	hexa_point(unsigned long a, int *len)
+static void	prova(unsigned long int n)
 {
-	if (a < 16)
-		ft_putchar("0123456789abcdef"[a % 16], len);
-	else if (a >= 16)
+	if (n >= 16)
 	{
-		hexa_point(a / 16, len);
-		ft_putchar("0123456789abcdef"[a % 16], len);
+		prova(n / 16);
+		prova(n % 16);
+	}
+	else
+	{
+		if (n > 9)
+			n += 87;
+		else
+			n += 48;
+		write(1, &n, 1);
 	}
 }
 
-void	ft_pointer(void *addr, int *len)
+int	ft_pointer(unsigned long int n)
 {
-	char	*str;
+	unsigned long int	i;
+	int					j;
 
-	if (addr == 0)
-		ft_putstr("(nil)", len);
-	else
+	i = n;
+	j = 1;
+	if (i == 0)
 	{
-		str = (char *)addr;
-		ft_putstr("0x", len);
-		hexa_point((unsigned long)str, len);
+		write(1, "(nil)", 5);
+		return (5);
 	}
+	write(1, "0x", 2);
+	prova(n);
+	while (i >= 16)
+	{
+		i /= 16;
+		j++;
+	}
+	return (j + 2);
 }

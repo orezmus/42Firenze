@@ -60,7 +60,7 @@ void PmergeMe::mergeList(std::list<int> &lst) {
 
 	lst.clear();
 	std::merge(left.begin(), left.end(), right.begin(), right.end(), std::back_inserter(lst));
-	}
+}
 
 void PmergeMe::sortVector() {
 	mergeVector(vec_);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sum <marvin@42.fr>                         +#+  +:+       +#+         #
+#    By: femorell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/04 16:32:29 by sum               #+#    #+#              #
-#    Updated: 2022/10/11 20:03:10 by sum              ###   ########.fr        #
+#    Created: 2023/03/13 15:23:16 by femorell          #+#    #+#              #
+#    Updated: 2023/03/13 15:23:18 by femorell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ SRCS := ft_atoi.c \
 	ft_malloc.c \
 	ft_strdup_alloc.c \
 	ft_strjoin_alloc.c
-	
+
 GNL := get_next_line/get_next_line.c
 
 OBJS = $(SRCS:.c=.o) $(GNL:.c=.o)

@@ -3,28 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sum <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: femorell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 18:24:39 by sum               #+#    #+#             */
-/*   Updated: 2022/05/19 18:24:42 by sum              ###   ########.fr       */
+/*   Created: 2022/10/26 16:45:30 by femorell          #+#    #+#             */
+/*   Updated: 2022/10/26 16:47:39 by femorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr(char *str, int *len)
+int	ft_putstr(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		ft_putstr("(null)", len);
-	else
+	if (str == 0)
 	{
-		while (str[i] != '\0')
-		{
-			ft_putchar(str[i], len);
-			i++;
-		}
+		write(1, "(null)", 6);
+		return (6);
 	}
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	return (i);
 }
